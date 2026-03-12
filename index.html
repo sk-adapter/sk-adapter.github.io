@@ -417,13 +417,16 @@ window.addEventListener('load', function() {
     var camera = new THREE.PerspectiveCamera(35, 1, 0.01, 100);
     camera.position.set(0, 0, 3);
 
-    scene.add(new THREE.AmbientLight(0xffffff, 0.6));
-    var d1 = new THREE.DirectionalLight(0xffffff, 1.0);
+    scene.add(new THREE.AmbientLight(0xffffff, 1.2));
+    var d1 = new THREE.DirectionalLight(0xffffff, 1.2);
     d1.position.set(5, 10, 7);
     scene.add(d1);
-    var d2 = new THREE.DirectionalLight(0xffffff, 0.4);
+    var d2 = new THREE.DirectionalLight(0xffffff, 0.8);
     d2.position.set(-5, -3, -5);
     scene.add(d2);
+    var d3 = new THREE.DirectionalLight(0xffffff, 0.6);
+    d3.position.set(0, -10, 5);
+    scene.add(d3);
 
     var controls = new THREE.OrbitControls(camera, canvas);
     controls.enableDamping = true;
