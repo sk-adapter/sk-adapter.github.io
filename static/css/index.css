@@ -150,7 +150,7 @@ body {
 
 .handle-circle {
   position: absolute;
-  top: -8px;
+  top: 8px;
   left: 50%;
   transform: translateX(-50%);
   width: 32px;

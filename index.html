@@ -276,46 +276,56 @@
 
 <script>
 (function() {
-  // Half-loop video playback: start at T/2, play to end, loop to 0, play to T/2, repeat
+  // Half-loop: start at T/2, play to end, seamlessly continue from 0 to T/2, repeat.
+  // Uses requestAnimationFrame for precise half-point detection (no stutter).
   function setupHalfLoopVideo(video) {
     video.muted = true;
-    video.loop = true;
-    video._hasLooped = false;
-    video._lastTime = 0;
+    video.loop = false;
+    // 'first' = playing from half to end; 'second' = playing from 0 to half
+    video._phase = 'first';
+    video._halfDuration = null;
 
     video.addEventListener('loadedmetadata', function() {
       video._halfDuration = video.duration / 2;
       video.currentTime = video._halfDuration;
-      video._lastTime = video._halfDuration;
     });
 
-    video.addEventListener('timeupdate', function() {
-      var half = video._halfDuration;
-      if (half === undefined) return;
-
-      // Detect natural loop (time jumps backward by more than 1s)
-      if (video.currentTime < video._lastTime - 1) {
-        video._hasLooped = true;
-      }
-
-      // After loop, when reaching half point again, seek back
-      if (video._hasLooped && video.currentTime >= half - 0.05) {
-        video.currentTime = half;
-        video._hasLooped = false;
-      }
-
-      video._lastTime = video.currentTime;
+    // When video reaches the natural end, seamlessly continue from 0
+    video.addEventListener('ended', function() {
+      video._phase = 'second';
+      video.currentTime = 0;
+      video.play();
     });
   }
 
-  // Sync two videos together
-  function syncVideos(master, slave) {
-    setInterval(function() {
-      if (Math.abs(master.currentTime - slave.currentTime) > 0.15) {
-        slave.currentTime = master.currentTime;
+  // Use a single rAF loop to monitor all video pairs for the half-point
+  var videoPairs = [];
+
+  function monitorLoop() {
+    for (var i = 0; i < videoPairs.length; i++) {
+      var pair = videoPairs[i];
+      var master = pair.skeleton;
+      var half = master._halfDuration;
+      if (half === null) continue;
+
+      // Check if master reached the half-point on second phase
+      if (master._phase === 'second' && master.currentTime >= half) {
+        master._phase = 'first';
+        master.currentTime = half;
+
+        pair.gs._phase = 'first';
+        pair.gs.currentTime = half;
       }
-    }, 500);
+
+      // Keep slave in sync with master
+      if (Math.abs(master.currentTime - pair.gs.currentTime) > 0.1) {
+        pair.gs.currentTime = master.currentTime;
+        pair.gs._phase = master._phase;
+      }
+    }
+    requestAnimationFrame(monitorLoop);
   }
+  requestAnimationFrame(monitorLoop);
 
   // Slider interaction
   function setupSlider(container) {
@@ -368,6 +378,9 @@
     setupHalfLoopVideo(skeleton);
     setupHalfLoopVideo(gs);
 
+    // Register pair for monitoring
+    videoPairs.push({ skeleton: skeleton, gs: gs });
+
     // Start playback when both videos are ready
     var readyCount = 0;
     function onReady() {
@@ -375,7 +388,6 @@
       if (readyCount >= 2) {
         skeleton.play();
         gs.play();
-        syncVideos(skeleton, gs);
       }
     }
 
