@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="SK-Adapter: Skeleton-Based Structural Control for Native 3D Generation">
+  <meta name="keywords" content="SK-Adapter, Skeleton, 3D Generation, Adapter, Structural Control">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SK-Adapter: Skeleton-Based Structural Control for Native 3D Generation</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">SK-Adapter: Skeleton-Based Structural Control for Native 3D Generation</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="#">Anbang Wang</a><sup>1*</sup>,</span>
+            <span class="author-block">
+              <a href="#">Yuzhuo Ao</a><sup>1*</sup>,</span>
+            <span class="author-block">
+              <a href="https://shangzhewu.github.io/">Shangzhe Wu</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://cse.hkust.edu.hk/~cktang/">Chi-Keung Tang</a><sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>The Hong Kong University of Science and Technology,</span>
+            <span class="author-block"><sup>2</sup>University of Cambridge</span>
+          </div>
+
+          <div class="is-size-6 publication-authors">
+            <span class="author-block"><sup>*</sup>Equal Contribution</span>
+          </div>
+
+
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Teaser -->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="./static/images/teaser.jpg" alt="SK-Adapter teaser figure" style="width: 100%;">
+      <h2 class="subtitle has-text-centered" style="margin-top: 15px;">
+        <b>TL;DR:</b> <span class="dnerf">SK-Adapter</span> efficiently generates 3D assets in native 3D domain from given
+        skeletons with its lightweight and effective designs.
+      </h2>
+    </div>
+  </div>
+</section>
+
+<!-- Abstract -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Native 3D generative models have achieved remarkable fidelity and speed, yet they suffer from a critical limitation:
+            inability to prescribe precise structural articulations, where precise structural control within the native 3D space
+            remains underexplored. This paper proposes <span class="dnerf">SK-Adapter</span>, a simple and yet highly efficient
+            and effective framework that unlocks precise skeletal manipulation for native 3D generation. Moving beyond text or
+            image prompts, which can be ambiguous for precise structure, we treat the 3D skeleton as a first-class control signal.
+            <span class="dnerf">SK-Adapter</span> is a lightweight structural adapter network that encodes joint coordinates and
+            topology into learnable tokens, which are injected into the frozen 3D generation backbone via cross-attention. This
+            smart design allows the model to not only effectively &ldquo;attend&rdquo; to specific 3D structural constraints but also
+            preserve its original generative priors. To bridge the data gap, we contribute <b>Objaverse-TMS</b> dataset, a large-scale
+            dataset of 24k text-mesh-skeleton pairs. Extensive experiments confirm that our method achieves robust structural
+            control while preserving the geometry and texture quality of the foundation model, significantly outperforming existing
+            baselines. Furthermore, we extend this capability to local 3D editing, enabling the region specific editing of existing
+            assets with skeletal guidance, which is unattainable by previous methods.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+<!-- Method -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Method</h2>
+        <div class="content has-text-centered">
+          <img src="./static/images/method.jpg" alt="SK-Adapter method overview" style="width: 100%;">
+        </div>
+        <div class="content has-text-justified">
+          <p>
+            <span class="dnerf">SK-Adapter</span> is a 3D skeleton-guided generation framework for precise structural control.
+            Unlike heavy multi-stage pipelines that rely on ambiguous 2D projections, <span class="dnerf">SK-Adapter</span>
+            utilizes Trellis as backbone and injects joint-based positional tokens into sparse structure transformer blocks.
+            This simple yet effective approach ensures spatial accuracy and high data efficiency, enabling the generation of
+            diverse, precisely-controlled 3D assets in seconds.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Results / Videos placeholder -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Results</h2>
+        <div class="content has-text-justified">
+          <p>
+            Coming soon: interactive 3D examples and video demos.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BibTeX -->
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{wang2026skadapter,
+  title     = {SK-Adapter: Skeleton-Based Structural Control for Native 3D Generation},
+  author    = {Wang, Anbang and Ao, Yuzhuo and Wu, Shangzhe and Tang, Chi-Keung},
+  journal   = {arXiv preprint},
+  year      = {2026},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            Website template borrowed from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
