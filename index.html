@@ -128,6 +128,50 @@
   </div>
 </section>
 
+<!-- Video Comparison Slider -->
+<section class="section" style="padding-top: 0;">
+  <div class="container is-max-widescreen">
+    <div class="columns is-multiline is-mobile is-variable is-2">
+      <div class="column is-3-desktop is-6-mobile">
+        <div class="video-compare-container">
+          <video class="video-compare-skeleton" src="./static/videos/21f400a12f7c4b2eb24158aeea46ad4e_skeleton.mp4" muted playsinline></video>
+          <video class="video-compare-gs" src="./static/videos/21f400a12f7c4b2eb24158aeea46ad4e_gs.mp4" muted playsinline></video>
+          <div class="video-compare-handle">
+            <div class="handle-circle"><i class="fas fa-arrows-alt-h"></i></div>
+          </div>
+        </div>
+      </div>
+      <div class="column is-3-desktop is-6-mobile">
+        <div class="video-compare-container">
+          <video class="video-compare-skeleton" src="./static/videos/2546097d0ea94ba88452ce62c041fb87_skeleton.mp4" muted playsinline></video>
+          <video class="video-compare-gs" src="./static/videos/2546097d0ea94ba88452ce62c041fb87_gs.mp4" muted playsinline></video>
+          <div class="video-compare-handle">
+            <div class="handle-circle"><i class="fas fa-arrows-alt-h"></i></div>
+          </div>
+        </div>
+      </div>
+      <div class="column is-3-desktop is-6-mobile">
+        <div class="video-compare-container">
+          <video class="video-compare-skeleton" src="./static/videos/be8c1eab5bc74cf394ae99f29abf5199_skeleton.mp4" muted playsinline></video>
+          <video class="video-compare-gs" src="./static/videos/be8c1eab5bc74cf394ae99f29abf5199_gs.mp4" muted playsinline></video>
+          <div class="video-compare-handle">
+            <div class="handle-circle"><i class="fas fa-arrows-alt-h"></i></div>
+          </div>
+        </div>
+      </div>
+      <div class="column is-3-desktop is-6-mobile">
+        <div class="video-compare-container">
+          <video class="video-compare-skeleton" src="./static/videos/e47bec6ca2be4969b948135d2b92ea63_skeleton.mp4" muted playsinline></video>
+          <video class="video-compare-gs" src="./static/videos/e47bec6ca2be4969b948135d2b92ea63_gs.mp4" muted playsinline></video>
+          <div class="video-compare-handle">
+            <div class="handle-circle"><i class="fas fa-arrows-alt-h"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Abstract -->
 <section class="section">
   <div class="container is-max-desktop">
@@ -229,6 +273,122 @@
     </div>
   </div>
 </footer>
+
+<script>
+(function() {
+  // Half-loop video playback: start at T/2, play to end, loop to 0, play to T/2, repeat
+  function setupHalfLoopVideo(video) {
+    video.muted = true;
+    video.loop = true;
+    video._hasLooped = false;
+    video._lastTime = 0;
+
+    video.addEventListener('loadedmetadata', function() {
+      video._halfDuration = video.duration / 2;
+      video.currentTime = video._halfDuration;
+      video._lastTime = video._halfDuration;
+    });
+
+    video.addEventListener('timeupdate', function() {
+      var half = video._halfDuration;
+      if (half === undefined) return;
+
+      // Detect natural loop (time jumps backward by more than 1s)
+      if (video.currentTime < video._lastTime - 1) {
+        video._hasLooped = true;
+      }
+
+      // After loop, when reaching half point again, seek back
+      if (video._hasLooped && video.currentTime >= half - 0.05) {
+        video.currentTime = half;
+        video._hasLooped = false;
+      }
+
+      video._lastTime = video.currentTime;
+    });
+  }
+
+  // Sync two videos together
+  function syncVideos(master, slave) {
+    setInterval(function() {
+      if (Math.abs(master.currentTime - slave.currentTime) > 0.15) {
+        slave.currentTime = master.currentTime;
+      }
+    }, 500);
+  }
+
+  // Slider interaction
+  function setupSlider(container) {
+    var skeleton = container.querySelector('.video-compare-skeleton');
+    var gs = container.querySelector('.video-compare-gs');
+    var handle = container.querySelector('.video-compare-handle');
+    var isDragging = false;
+
+    function updatePosition(x) {
+      var rect = container.getBoundingClientRect();
+      var pos = Math.max(0, Math.min(1, (x - rect.left) / rect.width));
+      var pct = pos * 100;
+      gs.style.clipPath = 'inset(0 0 0 ' + pct + '%)';
+      handle.style.left = pct + '%';
+    }
+
+    container.addEventListener('mousedown', function(e) {
+      isDragging = true;
+      updatePosition(e.clientX);
+      e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', function(e) {
+      if (isDragging) {
+        updatePosition(e.clientX);
+        e.preventDefault();
+      }
+    });
+
+    document.addEventListener('mouseup', function() {
+      isDragging = false;
+    });
+
+    container.addEventListener('touchstart', function(e) {
+      isDragging = true;
+      updatePosition(e.touches[0].clientX);
+    }, {passive: true});
+
+    document.addEventListener('touchmove', function(e) {
+      if (isDragging) {
+        updatePosition(e.touches[0].clientX);
+      }
+    }, {passive: true});
+
+    document.addEventListener('touchend', function() {
+      isDragging = false;
+    });
+
+    // Setup half-loop for both videos
+    setupHalfLoopVideo(skeleton);
+    setupHalfLoopVideo(gs);
+
+    // Start playback when both videos are ready
+    var readyCount = 0;
+    function onReady() {
+      readyCount++;
+      if (readyCount >= 2) {
+        skeleton.play();
+        gs.play();
+        syncVideos(skeleton, gs);
+      }
+    }
+
+    skeleton.addEventListener('canplay', onReady, {once: true});
+    gs.addEventListener('canplay', onReady, {once: true});
+  }
+
+  // Initialize all comparison containers
+  document.querySelectorAll('.video-compare-container').forEach(function(container) {
+    setupSlider(container);
+  });
+})();
+</script>
 
 </body>
 </html>
