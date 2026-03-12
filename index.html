@@ -132,7 +132,7 @@
 <section class="section" style="padding-top: 0;">
   <div class="container is-max-widescreen">
     <div class="columns is-multiline is-mobile is-variable is-2">
-      <div class="column is-3-desktop is-6-mobile">
+      <div class="column is-12-mobile is-6-tablet is-3-desktop">
         <div class="video-compare-container">
           <video class="video-compare-skeleton" src="./static/videos/21f400a12f7c4b2eb24158aeea46ad4e_skeleton.mp4" muted playsinline></video>
           <video class="video-compare-gs" src="./static/videos/21f400a12f7c4b2eb24158aeea46ad4e_gs.mp4" muted playsinline></video>
@@ -141,7 +141,7 @@
           </div>
         </div>
       </div>
-      <div class="column is-3-desktop is-6-mobile">
+      <div class="column is-12-mobile is-6-tablet is-3-desktop">
         <div class="video-compare-container">
           <video class="video-compare-skeleton" src="./static/videos/2546097d0ea94ba88452ce62c041fb87_skeleton.mp4" muted playsinline></video>
           <video class="video-compare-gs" src="./static/videos/2546097d0ea94ba88452ce62c041fb87_gs.mp4" muted playsinline></video>
@@ -150,7 +150,7 @@
           </div>
         </div>
       </div>
-      <div class="column is-3-desktop is-6-mobile">
+      <div class="column is-12-mobile is-6-tablet is-3-desktop">
         <div class="video-compare-container">
           <video class="video-compare-skeleton" src="./static/videos/be8c1eab5bc74cf394ae99f29abf5199_skeleton.mp4" muted playsinline></video>
           <video class="video-compare-gs" src="./static/videos/be8c1eab5bc74cf394ae99f29abf5199_gs.mp4" muted playsinline></video>
@@ -159,7 +159,7 @@
           </div>
         </div>
       </div>
-      <div class="column is-3-desktop is-6-mobile">
+      <div class="column is-12-mobile is-6-tablet is-3-desktop">
         <div class="video-compare-container">
           <video class="video-compare-skeleton" src="./static/videos/e47bec6ca2be4969b948135d2b92ea63_skeleton.mp4" muted playsinline></video>
           <video class="video-compare-gs" src="./static/videos/e47bec6ca2be4969b948135d2b92ea63_gs.mp4" muted playsinline></video>
@@ -225,16 +225,90 @@
   </div>
 </section>
 
-<!-- Results / Videos placeholder -->
+<!-- Interactive Examples -->
 <section class="section">
-  <div class="container is-max-desktop">
+  <div class="container is-max-widescreen">
     <div class="columns is-centered has-text-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3">Results</h2>
-        <div class="content has-text-justified">
-          <p>
-            Coming soon: interactive 3D examples and video demos.
-          </p>
+        <h2 class="title is-3">Interactive Examples</h2>
+        <p class="subtitle is-6" style="margin-bottom: 1.5rem;">Drag to rotate. Skeleton and mesh views are synchronized.</p>
+      </div>
+    </div>
+    <div class="columns is-multiline">
+      <!-- Row 1 -->
+      <div class="column is-6">
+        <div class="example-pair" data-mesh="./static/models/8f6d598411c7458d957ef199cff5191d.glb" data-skeleton="./static/models/8f6d598411c7458d957ef199cff5191d_skeleton.glb">
+          <div class="example-viewers">
+            <div class="viewer-wrap"><canvas class="viewer-canvas skeleton-canvas"></canvas><div class="viewer-label">Skeleton</div></div>
+            <div class="viewer-wrap"><canvas class="viewer-canvas mesh-canvas"></canvas><div class="viewer-label">Mesh</div></div>
+          </div>
+          <div class="example-caption"><span>Red Bird</span><a class="download-btn" href="./static/models/8f6d598411c7458d957ef199cff5191d.glb" download><i class="fas fa-download"></i> GLB</a></div>
+        </div>
+      </div>
+      <div class="column is-6">
+        <div class="example-pair" data-mesh="./static/models/60a474f1f87040f38e073f87a63b7548.glb" data-skeleton="./static/models/60a474f1f87040f38e073f87a63b7548_skeleton.glb">
+          <div class="example-viewers">
+            <div class="viewer-wrap"><canvas class="viewer-canvas skeleton-canvas"></canvas><div class="viewer-label">Skeleton</div></div>
+            <div class="viewer-wrap"><canvas class="viewer-canvas mesh-canvas"></canvas><div class="viewer-label">Mesh</div></div>
+          </div>
+          <div class="example-caption"><span>Scorpion</span><a class="download-btn" href="./static/models/60a474f1f87040f38e073f87a63b7548.glb" download><i class="fas fa-download"></i> GLB</a></div>
+        </div>
+      </div>
+      <!-- Row 2 -->
+      <div class="column is-6">
+        <div class="example-pair" data-mesh="./static/models/85595a416e91b3a6e40fe6c323dafd6a76e1ba25ace1435d842ba197145d185e.glb" data-skeleton="./static/models/85595a416e91b3a6e40fe6c323dafd6a76e1ba25ace1435d842ba197145d185e_skeleton.glb">
+          <div class="example-viewers">
+            <div class="viewer-wrap"><canvas class="viewer-canvas skeleton-canvas"></canvas><div class="viewer-label">Skeleton</div></div>
+            <div class="viewer-wrap"><canvas class="viewer-canvas mesh-canvas"></canvas><div class="viewer-label">Mesh</div></div>
+          </div>
+          <div class="example-caption"><span>Combat Mecha</span><a class="download-btn" href="./static/models/85595a416e91b3a6e40fe6c323dafd6a76e1ba25ace1435d842ba197145d185e.glb" download><i class="fas fa-download"></i> GLB</a></div>
+        </div>
+      </div>
+      <div class="column is-6">
+        <div class="example-pair" data-mesh="./static/models/ca8b4b3168b6fe63f7beabdcdaaa63374b503146c22fc4e7080e8232dadb82d5.glb" data-skeleton="./static/models/ca8b4b3168b6fe63f7beabdcdaaa63374b503146c22fc4e7080e8232dadb82d5_skeleton.glb">
+          <div class="example-viewers">
+            <div class="viewer-wrap"><canvas class="viewer-canvas skeleton-canvas"></canvas><div class="viewer-label">Skeleton</div></div>
+            <div class="viewer-wrap"><canvas class="viewer-canvas mesh-canvas"></canvas><div class="viewer-label">Mesh</div></div>
+          </div>
+          <div class="example-caption"><span>Raven</span><a class="download-btn" href="./static/models/ca8b4b3168b6fe63f7beabdcdaaa63374b503146c22fc4e7080e8232dadb82d5.glb" download><i class="fas fa-download"></i> GLB</a></div>
+        </div>
+      </div>
+      <!-- Row 3 -->
+      <div class="column is-6">
+        <div class="example-pair" data-mesh="./static/models/d5e29b26af22409595c94c13796f9a4a7d61b0326445f20c3f8e796467e431db.glb" data-skeleton="./static/models/d5e29b26af22409595c94c13796f9a4a7d61b0326445f20c3f8e796467e431db_skeleton.glb">
+          <div class="example-viewers">
+            <div class="viewer-wrap"><canvas class="viewer-canvas skeleton-canvas"></canvas><div class="viewer-label">Skeleton</div></div>
+            <div class="viewer-wrap"><canvas class="viewer-canvas mesh-canvas"></canvas><div class="viewer-label">Mesh</div></div>
+          </div>
+          <div class="example-caption"><span>Rocket</span><a class="download-btn" href="./static/models/d5e29b26af22409595c94c13796f9a4a7d61b0326445f20c3f8e796467e431db.glb" download><i class="fas fa-download"></i> GLB</a></div>
+        </div>
+      </div>
+      <div class="column is-6">
+        <div class="example-pair" data-mesh="./static/models/ecd359ae971c4594845ef3fe71e5576a.glb" data-skeleton="./static/models/ecd359ae971c4594845ef3fe71e5576a_skeleton.glb">
+          <div class="example-viewers">
+            <div class="viewer-wrap"><canvas class="viewer-canvas skeleton-canvas"></canvas><div class="viewer-label">Skeleton</div></div>
+            <div class="viewer-wrap"><canvas class="viewer-canvas mesh-canvas"></canvas><div class="viewer-label">Mesh</div></div>
+          </div>
+          <div class="example-caption"><span>Robotic Dog</span><a class="download-btn" href="./static/models/ecd359ae971c4594845ef3fe71e5576a.glb" download><i class="fas fa-download"></i> GLB</a></div>
+        </div>
+      </div>
+      <!-- Row 4 -->
+      <div class="column is-6">
+        <div class="example-pair" data-mesh="./static/models/fbbd95f7acd47333a624d23e5084b7926d5d5c386a3386e6e64d16a9e8a588eb.glb" data-skeleton="./static/models/fbbd95f7acd47333a624d23e5084b7926d5d5c386a3386e6e64d16a9e8a588eb_skeleton.glb">
+          <div class="example-viewers">
+            <div class="viewer-wrap"><canvas class="viewer-canvas skeleton-canvas"></canvas><div class="viewer-label">Skeleton</div></div>
+            <div class="viewer-wrap"><canvas class="viewer-canvas mesh-canvas"></canvas><div class="viewer-label">Mesh</div></div>
+          </div>
+          <div class="example-caption"><span>Deer</span><a class="download-btn" href="./static/models/fbbd95f7acd47333a624d23e5084b7926d5d5c386a3386e6e64d16a9e8a588eb.glb" download><i class="fas fa-download"></i> GLB</a></div>
+        </div>
+      </div>
+      <div class="column is-6">
+        <div class="example-pair" data-mesh="./static/models/8dce0257d3c8ce6e8149e102c5489970c8d71d4b4c43abe49c67d334d01bfbb6.glb" data-skeleton="./static/models/8dce0257d3c8ce6e8149e102c5489970c8d71d4b4c43abe49c67d334d01bfbb6_skeleton.glb">
+          <div class="example-viewers">
+            <div class="viewer-wrap"><canvas class="viewer-canvas skeleton-canvas"></canvas><div class="viewer-label">Skeleton</div></div>
+            <div class="viewer-wrap"><canvas class="viewer-canvas mesh-canvas"></canvas><div class="viewer-label">Mesh</div></div>
+          </div>
+          <div class="example-caption"><span>Gorilla</span><a class="download-btn" href="./static/models/8dce0257d3c8ce6e8149e102c5489970c8d71d4b4c43abe49c67d334d01bfbb6.glb" download><i class="fas fa-download"></i> GLB</a></div>
         </div>
       </div>
     </div>
@@ -276,64 +350,30 @@
 
 <script>
 (function() {
-  // Half-loop: start at T/2, play to end, seamlessly continue from 0 to T/2, repeat.
-  // Uses requestAnimationFrame for precise half-point detection (no stutter).
-  function setupHalfLoopVideo(video) {
-    video.muted = true;
-    video.loop = false;
-    // 'first' = playing from half to end; 'second' = playing from 0 to half
-    video._phase = 'first';
-    video._halfDuration = null;
-
-    video.addEventListener('loadedmetadata', function() {
-      video._halfDuration = video.duration / 2;
-      video.currentTime = video._halfDuration;
-    });
-
-    // When video reaches the natural end, seamlessly continue from 0
-    video.addEventListener('ended', function() {
-      video._phase = 'second';
-      video.currentTime = 0;
-      video.play();
-    });
-  }
-
-  // Use a single rAF loop to monitor all video pairs for the half-point
-  var videoPairs = [];
-
-  function monitorLoop() {
-    for (var i = 0; i < videoPairs.length; i++) {
-      var pair = videoPairs[i];
-      var master = pair.skeleton;
-      var half = master._halfDuration;
-      if (half === null) continue;
-
-      // Check if master reached the half-point on second phase
-      if (master._phase === 'second' && master.currentTime >= half) {
-        master._phase = 'first';
-        master.currentTime = half;
-
-        pair.gs._phase = 'first';
-        pair.gs.currentTime = half;
-      }
-
-      // Keep slave in sync with master
-      if (Math.abs(master.currentTime - pair.gs.currentTime) > 0.1) {
-        pair.gs.currentTime = master.currentTime;
-        pair.gs._phase = master._phase;
-      }
-    }
-    requestAnimationFrame(monitorLoop);
-  }
-  requestAnimationFrame(monitorLoop);
-
-  // Slider interaction
-  function setupSlider(container) {
+  // Video comparison sliders with native loop (no seeking = no stutter)
+  document.querySelectorAll('.video-compare-container').forEach(function(container) {
     var skeleton = container.querySelector('.video-compare-skeleton');
     var gs = container.querySelector('.video-compare-gs');
     var handle = container.querySelector('.video-compare-handle');
     var isDragging = false;
 
+    // Both videos: muted, native loop, start at midpoint
+    [skeleton, gs].forEach(function(video) {
+      video.muted = true;
+      video.loop = true;
+      video.addEventListener('loadedmetadata', function() {
+        video.currentTime = video.duration / 2;
+      });
+    });
+
+    // Gentle periodic sync to prevent drift
+    setInterval(function() {
+      if (Math.abs(skeleton.currentTime - gs.currentTime) > 0.2) {
+        gs.currentTime = skeleton.currentTime;
+      }
+    }, 3000);
+
+    // Slider drag
     function updatePosition(x) {
       var rect = container.getBoundingClientRect();
       var pos = Math.max(0, Math.min(1, (x - rect.left) / rect.width));
@@ -342,64 +382,146 @@
       handle.style.left = pct + '%';
     }
 
-    container.addEventListener('mousedown', function(e) {
-      isDragging = true;
-      updatePosition(e.clientX);
-      e.preventDefault();
-    });
+    container.addEventListener('mousedown', function(e) { isDragging = true; updatePosition(e.clientX); e.preventDefault(); });
+    document.addEventListener('mousemove', function(e) { if (isDragging) { updatePosition(e.clientX); e.preventDefault(); } });
+    document.addEventListener('mouseup', function() { isDragging = false; });
+    container.addEventListener('touchstart', function(e) { isDragging = true; updatePosition(e.touches[0].clientX); }, {passive: true});
+    document.addEventListener('touchmove', function(e) { if (isDragging) updatePosition(e.touches[0].clientX); }, {passive: true});
+    document.addEventListener('touchend', function() { isDragging = false; });
 
-    document.addEventListener('mousemove', function(e) {
-      if (isDragging) {
-        updatePosition(e.clientX);
-        e.preventDefault();
-      }
-    });
-
-    document.addEventListener('mouseup', function() {
-      isDragging = false;
-    });
-
-    container.addEventListener('touchstart', function(e) {
-      isDragging = true;
-      updatePosition(e.touches[0].clientX);
-    }, {passive: true});
-
-    document.addEventListener('touchmove', function(e) {
-      if (isDragging) {
-        updatePosition(e.touches[0].clientX);
-      }
-    }, {passive: true});
-
-    document.addEventListener('touchend', function() {
-      isDragging = false;
-    });
-
-    // Setup half-loop for both videos
-    setupHalfLoopVideo(skeleton);
-    setupHalfLoopVideo(gs);
-
-    // Register pair for monitoring
-    videoPairs.push({ skeleton: skeleton, gs: gs });
-
-    // Start playback when both videos are ready
+    // Start both when ready
     var readyCount = 0;
     function onReady() {
       readyCount++;
-      if (readyCount >= 2) {
-        skeleton.play();
-        gs.play();
-      }
+      if (readyCount >= 2) { skeleton.play(); gs.play(); }
     }
-
     skeleton.addEventListener('canplay', onReady, {once: true});
     gs.addEventListener('canplay', onReady, {once: true});
-  }
-
-  // Initialize all comparison containers
-  document.querySelectorAll('.video-compare-container').forEach(function(container) {
-    setupSlider(container);
   });
 })();
+</script>
+
+<!-- Three.js for interactive 3D viewers (global build for file:// compatibility) -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.137.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.137.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.137.0/examples/js/loaders/GLTFLoader.js"></script>
+<script>
+window.addEventListener('load', function() {
+  function createViewer(canvas) {
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0xf5f5f5, 1);
+    renderer.outputEncoding = THREE.sRGBEncoding;
+
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(35, 1, 0.01, 100);
+    camera.position.set(0, 0, 3);
+
+    scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+    var d1 = new THREE.DirectionalLight(0xffffff, 1.0);
+    d1.position.set(5, 10, 7);
+    scene.add(d1);
+    var d2 = new THREE.DirectionalLight(0xffffff, 0.4);
+    d2.position.set(-5, -3, -5);
+    scene.add(d2);
+
+    var controls = new THREE.OrbitControls(camera, canvas);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.1;
+    controls.enableZoom = true;
+    controls.enablePan = false;
+
+    return { renderer: renderer, scene: scene, camera: camera, controls: controls };
+  }
+
+  function fitCamera(camera, object, controls) {
+    var box = new THREE.Box3().setFromObject(object);
+    var center = box.getCenter(new THREE.Vector3());
+    var size = box.getSize(new THREE.Vector3());
+    var maxDim = Math.max(size.x, size.y, size.z);
+    var dist = maxDim / (2 * Math.tan(camera.fov * Math.PI / 360));
+    controls.target.copy(center);
+    camera.position.set(center.x, center.y, center.z + dist * 1.5);
+    camera.near = dist * 0.01;
+    camera.far = dist * 20;
+    camera.updateProjectionMatrix();
+    controls.update();
+  }
+
+  function resizeViewer(v) {
+    var c = v.renderer.domElement;
+    var r = c.getBoundingClientRect();
+    var w = r.width, h = r.height;
+    if (w === 0 || h === 0) return;
+    var pr = v.renderer.getPixelRatio();
+    if (c.width !== Math.round(w * pr) || c.height !== Math.round(h * pr)) {
+      v.renderer.setSize(w, h, false);
+      v.camera.aspect = w / h;
+      v.camera.updateProjectionMatrix();
+    }
+  }
+
+  var loader = new THREE.GLTFLoader();
+
+  document.querySelectorAll('.example-pair').forEach(function(pair) {
+    var meshUrl = pair.getAttribute('data-mesh');
+    var skelUrl = pair.getAttribute('data-skeleton');
+    var skelCanvas = pair.querySelector('.skeleton-canvas');
+    var meshCanvas = pair.querySelector('.mesh-canvas');
+
+    var sv = createViewer(skelCanvas);
+    var mv = createViewer(meshCanvas);
+
+    // Sync rotation between viewers
+    var syncing = false;
+    function syncAtoB(a, b) {
+      a.controls.addEventListener('change', function() {
+        if (syncing) return;
+        syncing = true;
+        b.camera.position.copy(a.camera.position);
+        b.camera.quaternion.copy(a.camera.quaternion);
+        b.controls.target.copy(a.controls.target);
+        b.controls.update();
+        syncing = false;
+      });
+    }
+    syncAtoB(sv, mv);
+    syncAtoB(mv, sv);
+
+    // Load mesh GLB
+    loader.load(meshUrl, function(gltf) {
+      mv.scene.add(gltf.scene);
+      fitCamera(mv.camera, gltf.scene, mv.controls);
+      // Copy fitted camera to skeleton viewer
+      sv.camera.position.copy(mv.camera.position);
+      sv.camera.quaternion.copy(mv.camera.quaternion);
+      sv.controls.target.copy(mv.controls.target);
+      sv.camera.near = mv.camera.near;
+      sv.camera.far = mv.camera.far;
+      sv.camera.updateProjectionMatrix();
+      sv.controls.update();
+    });
+
+    // Load skeleton GLB (y-up to z-up: rotate -90° around X)
+    loader.load(skelUrl, function(gltf) {
+      var wrapper = new THREE.Group();
+      wrapper.rotation.x = -Math.PI / 2;
+      wrapper.add(gltf.scene);
+      sv.scene.add(wrapper);
+    });
+
+    // Render loop
+    (function animate() {
+      requestAnimationFrame(animate);
+      sv.controls.update();
+      mv.controls.update();
+      resizeViewer(sv);
+      resizeViewer(mv);
+      sv.renderer.render(sv.scene, sv.camera);
+      mv.renderer.render(mv.scene, mv.camera);
+    })();
+  });
+});
 </script>
 
 </body>

@@ -119,11 +119,14 @@ body {
   background: #eee;
   user-select: none;
   -webkit-user-select: none;
+  touch-action: none;
 }
 
 .video-compare-container video {
   width: 100%;
+  height: auto;
   display: block;
+  pointer-events: none;
 }
 
 .video-compare-gs {
@@ -165,4 +168,70 @@ body {
   font-size: 12px;
   pointer-events: none;
   box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+
+/* Interactive Examples */
+.example-pair {
+  background: #f9f9f9;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.example-viewers {
+  display: flex;
+  gap: 0;
+}
+
+.viewer-wrap {
+  flex: 1;
+  position: relative;
+}
+
+.viewer-canvas {
+  width: 100%;
+  aspect-ratio: 1;
+  display: block;
+  cursor: grab;
+  background: #f5f5f5;
+}
+
+.viewer-canvas:active {
+  cursor: grabbing;
+}
+
+.viewer-label {
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #555;
+  background: rgba(255,255,255,0.8);
+  padding: 2px 8px;
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.example-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  border-top: 1px solid #eee;
+}
+
+.download-btn {
+  font-size: 12px;
+  font-weight: 500;
+  color: #4a90d9;
+  text-decoration: none;
+}
+
+.download-btn:hover {
+  text-decoration: underline;
 }
