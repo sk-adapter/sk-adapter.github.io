@@ -432,6 +432,7 @@
 <script src="https://cdn.jsdelivr.net/npm/three@0.137.0/build/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.137.0/examples/js/controls/OrbitControls.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.137.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.137.0/examples/js/environments/RoomEnvironment.js"></script>
 <script>
 window.addEventListener('load', function() {
   function createViewer(canvas) {
@@ -439,21 +440,28 @@ window.addEventListener('load', function() {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setClearColor(0xf5f5f5, 1);
     renderer.outputEncoding = THREE.sRGBEncoding;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.8;
 
     var scene = new THREE.Scene();
+
+    // Use a bright neutral environment for PBR lighting
+    var pmremGenerator = new THREE.PMREMGenerator(renderer);
+    pmremGenerator.compileEquirectangularShader();
+    var envScene = new THREE.RoomEnvironment();
+    var envTexture = pmremGenerator.fromScene(envScene).texture;
+    scene.environment = envTexture;
+    scene.background = new THREE.Color(0xf5f5f5);
+    pmremGenerator.dispose();
+
     var camera = new THREE.PerspectiveCamera(35, 1, 0.01, 100);
     camera.position.set(0, 0, 3);
 
-    scene.add(new THREE.AmbientLight(0xffffff, 1.2));
-    var d1 = new THREE.DirectionalLight(0xffffff, 1.2);
+    // Keep fill lights for non-PBR skeletons
+    scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+    var d1 = new THREE.DirectionalLight(0xffffff, 0.8);
     d1.position.set(5, 10, 7);
     scene.add(d1);
-    var d2 = new THREE.DirectionalLight(0xffffff, 0.8);
-    d2.position.set(-5, -3, -5);
-    scene.add(d2);
-    var d3 = new THREE.DirectionalLight(0xffffff, 0.6);
-    d3.position.set(0, -10, 5);
-    scene.add(d3);
 
     var controls = new THREE.OrbitControls(camera, canvas);
     controls.enableDamping = true;
