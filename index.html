@@ -441,41 +441,36 @@ window.addEventListener('load', function() {
     renderer.setClearColor(0xf5f5f5, 1);
     renderer.outputEncoding = THREE.sRGBEncoding;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.8;
+    renderer.toneMappingExposure = isMesh ? 1.8 : 1.0;
 
     var scene = new THREE.Scene();
-
-    // PBR environment (needed for mesh materials)
-    var pmremGenerator = new THREE.PMREMGenerator(renderer);
-    pmremGenerator.compileEquirectangularShader();
-    var envScene = new THREE.RoomEnvironment();
-    var envTexture = pmremGenerator.fromScene(envScene).texture;
-    scene.environment = envTexture;
     scene.background = new THREE.Color(0xf5f5f5);
-    pmremGenerator.dispose();
+
+    if (isMesh) {
+      // Mesh: use PBR IBL environment + extra bottom fill
+      var pmremGenerator = new THREE.PMREMGenerator(renderer);
+      pmremGenerator.compileEquirectangularShader();
+      var envTexture = pmremGenerator.fromScene(new THREE.RoomEnvironment()).texture;
+      scene.environment = envTexture;
+      pmremGenerator.dispose();
+
+      // Strong bottom fill to compensate for RoomEnvironment's top-heavy lighting
+      var dBottom = new THREE.DirectionalLight(0xffffff, 2.5);
+      dBottom.position.set(0, -1, 0);
+      scene.add(dBottom);
+    } else {
+      // Skeleton: simple direct lights only, no IBL (prevents over-illumination)
+      scene.add(new THREE.AmbientLight(0xffffff, 0.8));
+      var ds1 = new THREE.DirectionalLight(0xffffff, 0.6);
+      ds1.position.set(5, 10, 7);
+      scene.add(ds1);
+      var ds2 = new THREE.DirectionalLight(0xffffff, 0.4);
+      ds2.position.set(-5, -5, -3);
+      scene.add(ds2);
+    }
 
     var camera = new THREE.PerspectiveCamera(35, 1, 0.01, 100);
     camera.position.set(0, 0, 3);
-
-    if (isMesh) {
-      // Mesh: moderate fill lights + strong bottom fill
-      scene.add(new THREE.AmbientLight(0xffffff, 0.4));
-      var d1 = new THREE.DirectionalLight(0xffffff, 0.6);
-      d1.position.set(5, 10, 7);
-      scene.add(d1);
-      var dBottom = new THREE.DirectionalLight(0xffffff, 1.0);
-      dBottom.position.set(0, -10, 3);
-      scene.add(dBottom);
-    } else {
-      // Skeleton: softer, balanced lighting
-      scene.add(new THREE.AmbientLight(0xffffff, 0.3));
-      var ds1 = new THREE.DirectionalLight(0xffffff, 0.4);
-      ds1.position.set(5, 10, 7);
-      scene.add(ds1);
-      var ds2 = new THREE.DirectionalLight(0xffffff, 0.3);
-      ds2.position.set(0, -10, 3);
-      scene.add(ds2);
-    }
 
     var controls = new THREE.OrbitControls(camera, canvas);
     controls.enableDamping = true;
