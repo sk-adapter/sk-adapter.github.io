@@ -435,7 +435,7 @@
 <script src="https://cdn.jsdelivr.net/npm/three@0.137.0/examples/js/environments/RoomEnvironment.js"></script>
 <script>
 window.addEventListener('load', function() {
-  function createViewer(canvas) {
+  function createViewer(canvas, isMesh) {
     var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setClearColor(0xf5f5f5, 1);
@@ -445,7 +445,7 @@ window.addEventListener('load', function() {
 
     var scene = new THREE.Scene();
 
-    // Use a bright neutral environment for PBR lighting
+    // PBR environment (needed for mesh materials)
     var pmremGenerator = new THREE.PMREMGenerator(renderer);
     pmremGenerator.compileEquirectangularShader();
     var envScene = new THREE.RoomEnvironment();
@@ -457,11 +457,25 @@ window.addEventListener('load', function() {
     var camera = new THREE.PerspectiveCamera(35, 1, 0.01, 100);
     camera.position.set(0, 0, 3);
 
-    // Keep fill lights for non-PBR skeletons
-    scene.add(new THREE.AmbientLight(0xffffff, 0.5));
-    var d1 = new THREE.DirectionalLight(0xffffff, 0.8);
-    d1.position.set(5, 10, 7);
-    scene.add(d1);
+    if (isMesh) {
+      // Mesh: moderate fill lights + strong bottom fill
+      scene.add(new THREE.AmbientLight(0xffffff, 0.4));
+      var d1 = new THREE.DirectionalLight(0xffffff, 0.6);
+      d1.position.set(5, 10, 7);
+      scene.add(d1);
+      var dBottom = new THREE.DirectionalLight(0xffffff, 1.0);
+      dBottom.position.set(0, -10, 3);
+      scene.add(dBottom);
+    } else {
+      // Skeleton: softer, balanced lighting
+      scene.add(new THREE.AmbientLight(0xffffff, 0.3));
+      var ds1 = new THREE.DirectionalLight(0xffffff, 0.4);
+      ds1.position.set(5, 10, 7);
+      scene.add(ds1);
+      var ds2 = new THREE.DirectionalLight(0xffffff, 0.3);
+      ds2.position.set(0, -10, 3);
+      scene.add(ds2);
+    }
 
     var controls = new THREE.OrbitControls(camera, canvas);
     controls.enableDamping = true;
@@ -507,8 +521,8 @@ window.addEventListener('load', function() {
     var skelCanvas = pair.querySelector('.skeleton-canvas');
     var meshCanvas = pair.querySelector('.mesh-canvas');
 
-    var sv = createViewer(skelCanvas);
-    var mv = createViewer(meshCanvas);
+    var sv = createViewer(skelCanvas, false);
+    var mv = createViewer(meshCanvas, true);
 
     // Sync rotation between viewers
     var syncing = false;
