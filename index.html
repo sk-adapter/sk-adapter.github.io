@@ -444,8 +444,9 @@ window.addEventListener('load', function() {
     var scene = new THREE.Scene();
     scene.background = new THREE.Color(0xf5f5f5);
 
-    // Uniform lighting: 6 directional lights from all axes + ambient
-    scene.add(new THREE.AmbientLight(0xffffff, 1.0));
+    // Uniform lighting: strong ambient + hemisphere + 6-axis directional
+    scene.add(new THREE.AmbientLight(0xffffff, 0.8));
+    scene.add(new THREE.HemisphereLight(0xffffff, 0xffffff, 1.0));
     var dirs = [
       [ 1,  0,  0],
       [-1,  0,  0],
@@ -455,7 +456,7 @@ window.addEventListener('load', function() {
       [ 0,  0, -1]
     ];
     for (var i = 0; i < dirs.length; i++) {
-      var dl = new THREE.DirectionalLight(0xffffff, 0.5);
+      var dl = new THREE.DirectionalLight(0xffffff, 0.4);
       dl.position.set(dirs[i][0], dirs[i][1], dirs[i][2]);
       scene.add(dl);
     }
@@ -528,6 +529,16 @@ window.addEventListener('load', function() {
 
     // Load mesh GLB
     loader.load(meshUrl, function(gltf) {
+      // Force non-metallic so materials don't need IBL reflections
+      gltf.scene.traverse(function(child) {
+        if (child.isMesh && child.material) {
+          var mats = Array.isArray(child.material) ? child.material : [child.material];
+          mats.forEach(function(mat) {
+            if (mat.metalness !== undefined) mat.metalness = 0;
+            if (mat.roughness !== undefined) mat.roughness = 0.7;
+          });
+        }
+      });
       mv.scene.add(gltf.scene);
       fitCamera(mv.camera, gltf.scene, mv.controls);
       // Copy fitted camera to skeleton viewer
