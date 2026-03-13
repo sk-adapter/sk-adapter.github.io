@@ -183,10 +183,10 @@
           <p>
             Native 3D generative models have achieved remarkable fidelity and speed, yet they suffer from a critical limitation:
             inability to prescribe precise structural articulations, where precise structural control within the native 3D space
-            remains underexplored. This paper proposes <span class="dnerf">SK-Adapter</span>, a simple and yet highly efficient
+            remains underexplored. This paper proposes <b>SK-Adapter</b>, a simple and yet highly efficient
             and effective framework that unlocks precise skeletal manipulation for native 3D generation. Moving beyond text or
             image prompts, which can be ambiguous for precise structure, we treat the 3D skeleton as a first-class control signal.
-            <span class="dnerf">SK-Adapter</span> is a lightweight structural adapter network that encodes joint coordinates and
+            <b>SK-Adapter</b> is a lightweight structural adapter network that encodes joint coordinates and
             topology into learnable tokens, which are injected into the frozen 3D generation backbone via cross-attention. This
             smart design allows the model to not only effectively &ldquo;attend&rdquo; to specific 3D structural constraints but also
             preserve its original generative priors. To bridge the data gap, we contribute <b>Objaverse-TMS</b> dataset, a large-scale
@@ -213,8 +213,8 @@
         </div>
         <div class="content has-text-justified">
           <p>
-            <span class="dnerf">SK-Adapter</span> is a 3D skeleton-guided generation framework for precise structural control.
-            Unlike heavy multi-stage pipelines that rely on ambiguous 2D projections, <span class="dnerf">SK-Adapter</span>
+            <b>SK-Adapter</b> is a 3D skeleton-guided generation framework for precise structural control.
+            Unlike heavy multi-stage pipelines that rely on ambiguous 2D projections, <b>SK-Adapter</b>
             utilizes Trellis as backbone and injects joint-based positional tokens into sparse structure transformer blocks.
             This simple yet effective approach ensures spatial accuracy and high data efficiency, enabling the generation of
             diverse, precisely-controlled 3D assets in seconds.
